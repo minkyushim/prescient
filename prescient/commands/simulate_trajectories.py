@@ -49,11 +49,8 @@ def main(args):
     else:
         num_steps = int(args.num_steps)
 
-    if args.num_cells != None:
-        num_cells = int(args.num_cells)
-        
     # simulate forward
-    out = traj.simulate(xp, data_pt["tps"], data_pt["celltype"], data_pt["w"], net, config, args.num_sims, num_cells, num_steps, device, args.tp_subset, args.celltype_subset)
+    out = traj.simulate(xp, data_pt["tps"], data_pt["celltype"], data_pt["w"], net, config, args.num_sims, int(args.num_cells), num_steps, device, args.tp_subset, args.celltype_subset)
 
     # write simulation data to file
     out_path = os.path.join(args.out_path, args.model_path.split("/")[-1], 'seed_{}_train.epoch_{}_num.sims_{}_num.cells_{}_num.steps_{}_subsets_{}_{}_simulation.pt'.format(args.seed, args.epoch, args.num_sims, args.num_cells, num_steps, args.tp_subset, args.celltype_subset))
